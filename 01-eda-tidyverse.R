@@ -56,7 +56,7 @@ Gestation %>%
   geom_vline(data = dat_summary, aes(xintercept = weight_high), linetype = 3) +
   labs(
     title = "Is birth weight associated with maternal smoking*?",
-    subtitle = "Data source: Child Health and Development Studies in 1961 and 1962.",
+    subtitle = "From the Child Health and Development Studies in 1961 and 1962.",
     x = "Child birth weight (in ounces)",
     y = "Frequency",
     caption = "* Question in the survey: Does the mother smoke?"
