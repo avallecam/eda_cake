@@ -3,7 +3,7 @@
 
 #' 1. Run the whole script to generate the table and figure.
 #' 2. Modify one line: Replace `smoke` with `inc` or `race`. 
-#' 3. Identify: What are we calculating in table and figure outputs?
+#' 3. Identify: What summary statistics are we calculating in table and figure?
 
 # Setup ----------------------------------------------------------
 
@@ -62,7 +62,6 @@ dat %>%
   )
 
 
-# extra questions ---------------------------------------------------------
+# extra question ----------------------------------------------------------
 
-#' 5. What summary statistics are stored in `weight_low` and `weight_high`?
-#' 6. Activate the lines that start with hash tag (#). What changes?
+#' Activate the lines that start with hash tag (#). What changes?
