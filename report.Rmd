@@ -1,7 +1,12 @@
+---
+output: html_document
+---
 
 # my report
 
 ```{r}
-mtcars
+library(mosaicData)
+library(skimr)
+skimr::skim(Gestation)
 ```
 
