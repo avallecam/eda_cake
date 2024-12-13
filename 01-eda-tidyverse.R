@@ -32,8 +32,7 @@ dat_summary <- Gestation %>%
   ) %>% 
   # filter(smoke == "never" | smoke == "now") %>% 
   # mutate(smoke = str_to_title(smoke)) %>% 
-  mutate(smoke = fct_reorder(.f = smoke, .x = weight_mean)) %>% 
-  identity()
+  mutate(smoke = fct_reorder(.f = smoke, .x = weight_mean))
 
 # Print table
 dat_summary
