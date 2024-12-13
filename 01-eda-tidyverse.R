@@ -2,9 +2,8 @@
 # Steps -------------------------------------------------------------------
 
 #' 1. Run the whole script to generate the table and figure.
-#' 2. What summary statistics are stored in `weight_low` and `weight_high`?
-#' 3. Activate the lines that start with hash tag (#). What changes?
-#' 4. Replace all `smoke` words with `inc` or `race`. Discuss the change.
+#' 2. Modify one line: Replace `smoke` with `inc` or `race`. 
+#' 3. Identify: What are we calculating in table and figure outputs?
 
 # Setup ----------------------------------------------------------
 
@@ -13,17 +12,22 @@ library(mosaicData)
 library(tidyverse)
 
 # Access data
-data("Gestation")
+dat <- Gestation %>% 
+  rename(birthweight_oz = wt, exposure = smoke) %>% # Replace `smoke` with `inc` or `race` 
+  # filter(parity == 0) %>%
+  select(id, birthweight_oz, exposure)
+
+# Print data frame
+dat
 
 # Summary statistics ------------------------------------------------------
 
 # Generate table
-dat_summary <- Gestation %>% 
-  select(id, race, inc, smoke, number, gestation, wt) %>% 
-  group_by(smoke) %>% 
+dat_summary <- dat %>% 
+  group_by(exposure) %>% 
   summarise(
-    weight_mean = mean(wt),
-    weight_sd = sd(wt),
+    weight_mean = mean(birthweight_oz),
+    weight_sd = sd(birthweight_oz),
     total = n()
   ) %>% 
   mutate(
@@ -31,9 +35,7 @@ dat_summary <- Gestation %>%
     weight_low = weight_mean - (1.96 * weight_sem),
     weight_high = weight_mean + (1.96 * weight_sem),
   ) %>% 
-  # filter(smoke == "never" | smoke == "now") %>% 
-  # mutate(smoke = str_to_title(smoke)) %>% 
-  mutate(smoke = fct_reorder(.f = smoke, .x = weight_mean))
+  mutate(exposure = fct_reorder(.f = exposure, .x = weight_mean))
 
 # Print table
 dat_summary
@@ -42,15 +44,11 @@ dat_summary
 # Variable distribution ---------------------------------------------------
 
 # Generate and print figure
-Gestation %>% 
-  select(id, race, inc, smoke, number, gestation,wt) %>% 
-  rename(birthweight_oz = wt) %>% 
-  # filter(smoke == "never" | smoke == "now") %>% 
-  # mutate(smoke = str_to_title(smoke)) %>% 
-  mutate(smoke = fct_reorder(.f = smoke, .x = birthweight_oz, .fun = mean, .na_rm = TRUE)) %>% 
+dat %>% 
+  mutate(exposure = fct_reorder(.f = exposure, .x = birthweight_oz, .fun = mean, .na_rm = TRUE)) %>% 
   ggplot(aes(x = birthweight_oz)) +
   geom_histogram() +
-  facet_grid(vars(smoke)) +
+  facet_grid(vars(exposure)) +
   scale_x_continuous(breaks = scales::pretty_breaks()) +
   geom_vline(data = dat_summary, aes(xintercept = weight_mean)) +
   geom_vline(data = dat_summary, aes(xintercept = weight_low), linetype = 3) +
@@ -62,3 +60,9 @@ Gestation %>%
     y = "Frequency",
     caption = "* Question in the survey: Does the mother smoke?"
   )
+
+
+# extra questions ---------------------------------------------------------
+
+#' 5. What summary statistics are stored in `weight_low` and `weight_high`?
+#' 6. Activate the lines that start with hash tag (#). What changes?
