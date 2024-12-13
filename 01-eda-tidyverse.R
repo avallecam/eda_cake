@@ -1,20 +1,20 @@
 
 
-# steps -------------------------------------------------------------------
+# Steps -------------------------------------------------------------------
 
 #' 1. Run the whole script to generate the table and figure.
 #' 2. What summary statistics are stored in `weight_low` and `weight_high`?
 #' 3. Activate the lines that start with hash tag (#). What changes?
 #' 4. Replace all `smoke` words with `inc` or `race`. Discuss the change.
 
-# access to data ----------------------------------------------------------
+# Access to data ----------------------------------------------------------
 
 library(mosaicData)
 library(tidyverse)
 
 data("Gestation")
 
-# summary statistics ------------------------------------------------------
+# Summary statistics ------------------------------------------------------
 
 # Generate table
 dat_summary <- Gestation %>% 
@@ -38,7 +38,7 @@ dat_summary <- Gestation %>%
 dat_summary
 
 
-# variable distribution ---------------------------------------------------
+# Variable distribution ---------------------------------------------------
 
 # Generate and print figure
 Gestation %>% 
