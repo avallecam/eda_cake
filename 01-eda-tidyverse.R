@@ -4,8 +4,8 @@
 
 #' 1. Run the whole script to generate the table and figure.
 #' 2. What summary statistics are stored in `weight_low` and `weight_high`?
-#' 3. Replace all `smoke` words with `inc` or `race`. Discuss the change.
-#' 4. Activate the lines that start with hash tag (#). What changes?
+#' 3. Activate the lines that start with hash tag (#). What changes?
+#' 4. Replace all `smoke` words with `inc` or `race`. Discuss the change.
 
 # access to data ----------------------------------------------------------
 
